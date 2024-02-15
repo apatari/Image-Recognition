@@ -40,13 +40,17 @@ class Url:
 
     def getNames(self, user_id):
 
+        res = []
+
         with app.app_context():
 
             #get the coordinates of the faces 
             coordinates = self.getCoordinates()
 
+            print("All coordiates at top", coordinates)
+
             #get the user's image objects from db
-            image_objects = User.query.filter_by(id=user_id).first()
+            image_objects = User.query.filter_by(id=user_id).first().images
 
             #put the image from the target url into an image file
             bigPictureData = requests.get(self.url).content
@@ -55,15 +59,50 @@ class Url:
             f.close()
 
 
-
+            # iterate through each face,  as defined by the coordinates 
             for index, coordinate in enumerate(coordinates):
                 top = coordinate[0]
                 right = coordinate[1]
                 bottom = coordinate[2]
                 left = coordinate[3]
 
+                foundMatch = False
+
+                print(index, coordinate)
+
+                #temporarily save an image of that face
                 with Image.open('bigPicture.jpg') as im:
-                    im.crop((left, top, right, bottom)).show()
+                    im.crop((left, top, right, bottom)).save('target.jpg')
+                #note that I might not need to programatically name, just target.jpg // f'target{str(index)}.jpg'
+                    
+                for im_ob in image_objects:
+                    print('looking at image of ', im_ob.name)
+                    dbData = requests.get(im_ob.url).content
+                    f = open('dbImage.jpg', 'wb')
+                    f.write(dbData)
+                    f.close()
+                    known_image = face_recognition.load_image_file('dbImage.jpg')
+                    unknown_image = face_recognition.load_image_file('target.jpg')
+
+                    if face_recognition.face_encodings(known_image) and face_recognition.face_encodings(unknown_image):
+
+                        known_enc = face_recognition.face_encodings(known_image)[0]
+                        unknown_enc = face_recognition.face_encodings(unknown_image)[0]
+
+                        results = face_recognition.compare_faces([known_enc], unknown_enc, tolerance=.6)
+
+                        if results[0]:
+                            res.append({"name": im_ob.name, "coordinates": coordinate})
+                            foundMatch = True
+                    
+                if not foundMatch:
+                    res.append({"name": False, "coordinates": coordinate})
+
+            return res
+
+
+
+                
 
 
 
