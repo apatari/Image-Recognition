@@ -38,7 +38,7 @@ class Url:
     # * Then take the coordinates, create a series of face images, look for matches in db
     #     and add a name key/value to all coordinates, with false for unknowns
 
-    def getNames(self, user_id):
+    def getNames(self, user_id, tolerance=0.6):
 
         res = []
 
@@ -73,6 +73,8 @@ class Url:
                 #temporarily save an image of that face
                 with Image.open('bigPicture.jpg') as im:
                     im.crop((left, top, right, bottom)).save('target.jpg')
+
+                #generate a dict of the face encodings so this doesn't need to be repeated
                 
                     
                 for im_ob in image_objects:
@@ -89,11 +91,13 @@ class Url:
                         known_enc = face_recognition.face_encodings(known_image)[0]
                         unknown_enc = face_recognition.face_encodings(unknown_image)[0]
 
-                        results = face_recognition.compare_faces([known_enc], unknown_enc, tolerance=.6)
+                        results = face_recognition.compare_faces([known_enc], unknown_enc, tolerance=tolerance)
 
                         if results[0]:
                             res.append({"name": im_ob.name, "coordinates": coordinate})
                             foundMatch = True
+                            break
+                            
                     
                 if not foundMatch:
                     res.append({"name": False, "coordinates": coordinate})
