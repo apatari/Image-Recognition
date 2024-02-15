@@ -40,3 +40,20 @@ class User(db.Model, SerializerMixin):
     
     def __repr__(self):
         return f'User {self.username}, ID: {self.id}'
+    
+class Image(db.Model, SerializerMixin):
+    __tablename__ = 'images'
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    name = db.Column(db.String, nullable=False)
+    url = db.Column(db.String, nullable=False)
+
+    user = db.relationship('User', back_populates='favorites')
+
+    serialize_only = ('id', 'user_id', 'name', 'url')
+
+    def __repr__(self) -> str:
+        return f'Image {self.id}: {self.name}'
+
+    
