@@ -73,7 +73,7 @@ class Url:
                 #temporarily save an image of that face
                 with Image.open('bigPicture.jpg') as im:
                     im.crop((left, top, right, bottom)).save('target.jpg')
-                #note that I might not need to programatically name, just target.jpg // f'target{str(index)}.jpg'
+                
                     
                 for im_ob in image_objects:
                     print('looking at image of ', im_ob.name)
@@ -98,25 +98,12 @@ class Url:
                 if not foundMatch:
                     res.append({"name": False, "coordinates": coordinate})
 
+            # remember to delete bigpicture and target
             return res
 
 
 
                 
-
-
-
-
-                # f = open(f'target{str(index)}.jpg', 'wb')
-                # f.write(targetData)
-                # f.close
-
-                # for im_ob in image_objects:
-
-
-                # programatically create and name an image file for each one
-                # iterate through all of the user's photos, if any one matches, append the dict with the name to the result
-                #   else append the dict with false
 
     
 
