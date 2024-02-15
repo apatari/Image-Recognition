@@ -14,6 +14,10 @@ class User(db.Model, SerializerMixin):
     username = db.Column(db.Integer, unique=True, nullable=False)
     _password_hash = db.Column(db.String)
 
+    images = db.relationship('Image', back_populates='user', cascade='all')
+
+    serialize_rules = ('-images.user',)
+
     @validates('username')
     def validate_username(self, key, name):
         if not name or not 0 < len(name) <= 20:
@@ -49,7 +53,7 @@ class Image(db.Model, SerializerMixin):
     name = db.Column(db.String, nullable=False)
     url = db.Column(db.String, nullable=False)
 
-    user = db.relationship('User', back_populates='favorites')
+    user = db.relationship('User', back_populates='images')
 
     serialize_only = ('id', 'user_id', 'name', 'url')
 

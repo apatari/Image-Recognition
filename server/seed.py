@@ -1,28 +1,45 @@
 #!/usr/bin/env python3
 
 # Standard library imports
-from random import randint, choice as rc
+
 
 # Remote library imports
-from faker import Faker
+
 
 # Local imports
 from app import app
-from models import db, User
+from models import db, User, Image
 
 if __name__ == '__main__':
-    fake = Faker()
+    
     with app.app_context():
         print("Starting seed...")
         # Seed code goes here!
 
         print("Deleting tables...")
         User.query.delete()
+        Image.query.delete()
 
         print("Adding...")
 
         u1 = User(username="test")
         u1.password_hash="bigPuppy"
+        u2 = User(username="test2")
+        u2.password_hash="bigPuppy"
 
         db.session.add(u1)
+        db.session.add(u2)
         db.session.commit()
+
+        images = [
+            Image(name='Harry', user_id='1', url='https://upload.wikimedia.org/wikipedia/en/d/d7/Harry_Potter_character_poster.jpg'),
+            Image(name='Hermoine', user_id='1', url='https://static.wikia.nocookie.net/characters/images/a/a5/Latest_%2810%29.jpg/revision/latest?cb=20141230074301'),
+            Image(name='Ron', user_id='1', url='https://upload.wikimedia.org/wikipedia/en/5/5e/Ron_Weasley_poster.jpg'),
+            Image(name='Snape', user_id='1', url='https://upload.wikimedia.org/wikipedia/en/b/b9/Ootp076.jpg'),
+        ]
+        for image in images:
+            db.session.add(image)
+        
+        db.session.commit()
+
+
