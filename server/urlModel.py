@@ -3,7 +3,7 @@ from PIL import Image
 import requests
 import os
 from models import User
-from app import app
+from config import app
 
 # I want to send my backend an image url and a user name, then return an array
 #  containing dicts with all of the coordinates for faces in the image, along with
@@ -46,8 +46,6 @@ class Url:
 
             #get the coordinates of the faces 
             coordinates = self.getCoordinates()
-
-            print("All coordiates at top", coordinates)
 
             #get the user's image objects from db
             image_objects = User.query.filter_by(id=user_id).first().images
