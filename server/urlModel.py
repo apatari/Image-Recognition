@@ -100,7 +100,7 @@ class Url:
                 if not foundMatch:
                     res.append({"name": "Unknown", "coordinates": coordinate})
 
-            # delete bigpicture and target?
+            # delete bigpicture, dbImage and target
             os.remove('bigPicture.jpg')
             os.remove('dbImage.jpg')
             os.remove('target.jpg')
