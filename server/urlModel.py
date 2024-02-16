@@ -98,7 +98,7 @@ class Url:
                             
                     
                 if not foundMatch:
-                    res.append({"name": False, "coordinates": coordinate})
+                    res.append({"name": "Unknown", "coordinates": coordinate})
 
             # delete bigpicture and target?
             return res
