@@ -3,7 +3,7 @@ import { Switch, Route } from "react-router-dom";
 
 function App() {
 
-  const PHOTO = "https://deadline.com/wp-content/uploads/2023/04/MCDHAPO_EC151.jpg?w=800"
+  const PHOTO = "https://hips.hearstapps.com/hmg-prod/images/harry-potter-1611601655.jpg?crop=0.5xw:1xh;center,top&resize=1200:*"
 
   const [imageData, setImageData] = useState([])
 
@@ -48,9 +48,9 @@ function App() {
         return (
           <div>
             <div style={{position:'absolute', right:'', left:`${item.coordinates[3] + 25}px`, top:`${item.coordinates[2]}px`, color:'red'}} >
-              <h2>{item.name}</h2>
+              <h2  style={{background: "red", color:'white' }} >{item.name}</h2>
             </div>
-            <div style={{position:'absolute', right:'', left:`${item.coordinates[3] + 25}px`, top:`${item.coordinates[2] - 25}px`, color:'red'}} >
+            <div style={{position:'absolute', right:'', left:`${item.coordinates[3] + 25}px`, top:`${item.coordinates[2] - 23}px`, color:'red'}} >
               <h2>__________</h2>
             </div>
           </div>
