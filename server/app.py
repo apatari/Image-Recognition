@@ -71,11 +71,30 @@ class CheckSession(Resource):
         else:
             return {"errors": "User not logged in"}, 401
 
+class Signup(Resource):
+
+    def post(self):
+
+        json = request.get_json()
+
+        try:
+            user = User(username=json.get('username'))
+            user.password_hash = json.get('password')
+            db.session.add(user)
+            db.session.commit()
+
+            session['user_id'] = user.id
+
+            return user.to_dict(), 201
+        
+        except Exception as err:
+            return {"errors": [str(err)]}, 422
 
 api.add_resource(ImageScan, '/api/image_scan')
 api.add_resource(Login, '/api/login')
 api.add_resource(Logout, '/api/logout')
 api.add_resource(CheckSession, '/api/check_session')
+api.add_resource(Signup, '/api/signup')
 
 # @app.route('/')
 # def index():
