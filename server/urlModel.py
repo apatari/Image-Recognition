@@ -101,6 +101,9 @@ class Url:
                     res.append({"name": "Unknown", "coordinates": coordinate})
 
             # delete bigpicture and target?
+            os.remove('bigPicture.jpg')
+            os.remove('dbImage.jpg')
+            os.remove('target.jpg')
             return res
 
 
