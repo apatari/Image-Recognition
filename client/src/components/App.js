@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Switch, Route } from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 function App() {
 
@@ -47,12 +48,12 @@ function App() {
       {(imageData.data)? imageData.data.map((item) => {
         return (
           <div>
-            <div style={{position:'absolute', right:'', left:`${item.coordinates[3] + 25}px`, top:`${item.coordinates[2]}px`, color:'red'}} >
-              <h2  style={{background: "red", color:'white' }} >{item.name}</h2>
+            <div style={{position:'absolute', right:'', left:`${item.coordinates[3] + 25}px`, top:`${item.coordinates[2] + 10}px`, color:'red'}} >
+              <h4 className="p-1" style={{background: "red", color:'white' }} >{item.name}</h4>
             </div>
-            <div style={{position:'absolute', right:'', left:`${item.coordinates[3] + 25}px`, top:`${item.coordinates[2] - 23}px`, color:'red'}} >
-              <h2>__________</h2>
-            </div>
+            {/* <div style={{position:'absolute', right:'', left:`${item.coordinates[3] + 25}px`, top:`${item.coordinates[2] - 35}px`, color:'red'}} >
+              <h2>______</h2>
+            </div> */}
           </div>
         )
       }): ""}
