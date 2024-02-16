@@ -78,7 +78,7 @@ class Url:
                 with Image.open('bigPicture.jpg') as im:
                     im.crop((left, top, right, bottom)).save('target.jpg')
 
-                #generate a dict of the face encodings so this doesn't need to be repeated
+                
                 unknown_image = face_recognition.load_image_file('target.jpg')
                 
    
