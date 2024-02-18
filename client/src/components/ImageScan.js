@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Switch, Route } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css'
+import ImageWithNames from "./ImageWithNames";
 
 function ImageScan() {
 
@@ -34,29 +34,7 @@ function ImageScan() {
   return (
     <div>
       
-      <div  >
-
-      
-        <img 
-          src={PHOTO} 
-          alt="submitted image" 
-          // style={{width: right - left, height: bottom - top, objectPosition: "139px 0`", objectFit:"none"}}
-          style={{position:'relative'}}
-          
-        />
-      </div>
-      {imageData.data.map((item) => {
-        return (
-          <div>
-            <div style={{position:'absolute', right:'', left:`${item.coordinates[3] + 25}px`, top:`${item.coordinates[2] + 10}px`, color:'red'}} >
-              <h4 className="p-1" style={{background: "red", color:'white' }} >{item.name}</h4>
-            </div>
-            {/* <div style={{position:'absolute', right:'', left:`${item.coordinates[3] + 25}px`, top:`${item.coordinates[2] - 35}px`, color:'red'}} >
-              <h2>______</h2>
-            </div> */}
-          </div>
-        )
-      })}
+      <ImageWithNames imageData={imageData} PHOTO={PHOTO} />
       
       
     </div>
