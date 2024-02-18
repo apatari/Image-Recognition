@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import ImageWithNames from "./ImageWithNames";
+import { Spinner } from "react-bootstrap"
 
 function ImageScan() {
 
@@ -25,14 +26,14 @@ function ImageScan() {
 
   if (!imageData.data.length > 0) {
     return (
-      <div>
-        Loading...
+      <div className="m-4" >
+        <Spinner animation="grow" /> Loading
       </div>
     )
   }
 
   return (
-    <div>
+    <div className="m-3" >
       
       <ImageWithNames imageData={imageData} PHOTO={PHOTO} />
       
