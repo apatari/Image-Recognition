@@ -23,7 +23,7 @@ function ImageScan() {
     })
   }, [])
 
-  if (!imageData) {
+  if (!imageData.data.length > 0) {
     return (
       <div>
         Loading...
