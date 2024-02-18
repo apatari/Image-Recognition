@@ -6,7 +6,7 @@ function ImageScan() {
 
   const PHOTO = "https://media.vanityfair.com/photos/597f32fff3c6f80e768c7fc4/1:1/w_916,h_916,c_limit/daenerys-game-of-thrones-recap.jpg"
 
-  const [imageData, setImageData] = useState([])
+  const [imageData, setImageData] = useState({"data":[]})
 
   useEffect(() => {
     fetch('/api/image_scan', {
@@ -45,7 +45,7 @@ function ImageScan() {
           
         />
       </div>
-      {(imageData.data)? imageData.data.map((item) => {
+      {imageData.data.map((item) => {
         return (
           <div>
             <div style={{position:'absolute', right:'', left:`${item.coordinates[3] + 25}px`, top:`${item.coordinates[2] + 10}px`, color:'red'}} >
@@ -56,7 +56,7 @@ function ImageScan() {
             </div> */}
           </div>
         )
-      }): ""}
+      })}
       
       
     </div>
