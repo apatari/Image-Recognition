@@ -19,8 +19,8 @@ class ImageScan(Resource):
     def post(self):
 
         url = request.get_json()['url']
-        # get the userid from session
 
+        # get the userid from session
         data = Url(url=url).getNames(1)
 
         return {"data":data}, 200
