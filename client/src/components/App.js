@@ -3,6 +3,7 @@ import { Switch, Route } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import ImageScan from "./ImageScan";
 import Login from "./Login/Login";
+import Header from "./Header";
 
 export const UserContext = createContext(null)
 
@@ -23,7 +24,7 @@ function App() {
   if (!user) return (
     <div>
       <UserContext.Provider value={[user, setUser]}>
-        
+        <Header/>
         <Login onLogin={setUser}/>
       </UserContext.Provider>
 
@@ -32,6 +33,7 @@ function App() {
   return (
     <div>
       <UserContext.Provider value = {[user, setUser]}>
+        <Header/>
         <ImageScan />
       </UserContext.Provider>
      
