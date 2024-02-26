@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import ImageWithNames from "./ImageWithNames";
 import { Spinner } from "react-bootstrap"
+import { UserContext } from "./App";
 
 function ImageScan() {
+
+  const [user, setUser] = useContext(UserContext)
 
   const PHOTO = "https://media.vanityfair.com/photos/597f32fff3c6f80e768c7fc4/1:1/w_916,h_916,c_limit/daenerys-game-of-thrones-recap.jpg"
 
@@ -34,7 +37,7 @@ function ImageScan() {
 
   return (
     <div className="m-3" >
-      
+      {user.id}
       <ImageWithNames imageData={imageData} PHOTO={PHOTO} />
       
       
