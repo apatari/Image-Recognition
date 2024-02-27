@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import ImageScan from "./ImageScan";
 import Login from "./Login/Login";
 import Header from "./Header";
+import Library from "./Library";
 
 export const UserContext = createContext(null)
 
@@ -34,7 +35,20 @@ function App() {
     <div>
       <UserContext.Provider value = {[user, setUser]}>
         <Header/>
-        <ImageScan />
+
+        <Switch>
+          <Route exact path="/" >
+            <Library />
+          </Route>
+        </Switch>
+        <Switch>
+          <Route exact path="/scan" >
+            <ImageScan />
+          </Route>
+        </Switch>
+
+
+        
       </UserContext.Provider>
      
     </div>
