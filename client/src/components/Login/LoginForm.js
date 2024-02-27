@@ -69,7 +69,7 @@ function LoginForm({ onLogin }) {
 
                     <Form.Group className="m-3 form-floating" >
                         <Form.Control
-                            type="passwrod" 
+                            type="password" 
                             name="password" 
                             id="password" 
                             placeholder="Password"
