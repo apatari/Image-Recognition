@@ -89,7 +89,21 @@ class Signup(Resource):
         
         except Exception as err:
             return {"errors": [str(err)]}, 422
+        
+class ImageIndex(Resource):
 
+    def get(self):
+
+        user_id = session.get('user_id')
+
+        if not user_id:
+            return {"errors": "user not logged in"}, 401
+
+        images = [image.to_dict() for image in Image.query.filter_by(user_id=user_id).all()]
+
+        return images, 200
+
+api.add_resource(ImageIndex, '/api/images')
 api.add_resource(ImageScan, '/api/image_scan')
 api.add_resource(Login, '/api/login')
 api.add_resource(Logout, '/api/logout')
