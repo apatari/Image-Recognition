@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Button, Row, Col, InputGroup, Form } from "react-bootstrap";
 import ImageCard from "./ImageCards"
+import AddImageModal from "./AddImageModal";
 
 
 function Library() {
 
     const [images, setImages] = useState([])
     const [searchText, setSearchText] = useState("")
+    const [showModal, setShowModal] = useState(false)
+
+    const handleCloseModal = () => setShowModal(false)
+    const handleOpenModal = () => setShowModal(true)
 
     const handleSearchChange = (e) => {
         setSearchText(e.target.value)
@@ -24,7 +29,7 @@ function Library() {
     return (
         <div className="m-4" >
             <h3 className="my-3" >Image Library</h3>
-            <Button className="mb-3 ms-3" >Add new image</Button>
+            <Button className="mb-3 ms-3" onClick={handleOpenModal} >Add new image</Button>
             <Row className="p-3" >
                 <Col lg={1}>
                     
@@ -46,6 +51,8 @@ function Library() {
             <Row className="d-flex flex-wrap" >
                 {images.filter(image => image.name.toLowerCase().includes(searchText.toLowerCase())).map(image => <ImageCard key={image.id} image={image} /> )}
             </Row>
+
+            <AddImageModal show={showModal} handleClose={handleCloseModal} />
             
         </div>
     )
