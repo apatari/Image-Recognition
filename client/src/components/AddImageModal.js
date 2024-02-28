@@ -4,7 +4,7 @@ import * as yup from "yup";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { Modal, Button, Form } from "react-bootstrap";
 
-function AddImageModal({ show, handleClose }) {
+function AddImageModal({ show, handleClose, images, setImages }) {
 
 
     const [errors, setErrors] = useState([])
@@ -34,8 +34,13 @@ function AddImageModal({ show, handleClose }) {
                 body: JSON.stringify(values),
             }).then(r => {
                 if (r.ok) {
-                     
-                    history.push('/')    
+                    r.json().then(data => {
+                        
+                        setImages([...images, data])
+                        handleClose() 
+                    // history.push('/')
+                    } )
+                        
                 } else {
                     r.json().then(err => {
                         
@@ -55,41 +60,44 @@ function AddImageModal({ show, handleClose }) {
                     Add Image
                 </Modal.Title>
             </Modal.Header>
+            <Form onSubmit={formik.handleSubmit} >
             <Modal.Body>
-                <Form>
+                
                     <Form.Group className="m-3 form-floating" >
                         <Form.Control
                             type="text" 
                             name="name" 
                             id="name" 
                             placeholder="Name"
-                            // value={formik.values.name}
-                            // onChange={formik.handleChange} 
+                            value={formik.values.name}
+                            onChange={formik.handleChange} 
                         >
                         </Form.Control>
                         <Form.Label> Name </Form.Label>
                     </Form.Group>
-
+                    {formik.errors.name? <p className="ms-4 text-danger" >{formik.errors.name}</p> : ""}
                     <Form.Group className="m-3 form-floating" >
                         <Form.Control
                             type="text" 
                             name="url" 
                             id="url" 
                             placeholder="Image URL"
-                            // value={formik.values.url}
-                            // onChange={formik.handleChange} 
+                            value={formik.values.url}
+                            onChange={formik.handleChange} 
                         >
                         </Form.Control>
                         <Form.Label> Image URL </Form.Label>
 
                     </Form.Group>
-                </Form>
+                    {formik.errors.url? <p className="ms-4 text-danger" >{formik.errors.url}</p> : ""}
+                
                 
             </Modal.Body>
             <Modal.Footer>
-                <Button className="me-auto" >Add</Button>
+                <Button className="me-auto" type="submit" >Add</Button>
                 <Button className="btn-secondary" onClick={handleClose} >Cancel</Button>
             </Modal.Footer>
+            </Form>
         </Modal>
     )
 }

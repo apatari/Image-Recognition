@@ -52,7 +52,7 @@ function Library() {
                 {images.filter(image => image.name.toLowerCase().includes(searchText.toLowerCase())).map(image => <ImageCard key={image.id} image={image} /> )}
             </Row>
 
-            <AddImageModal show={showModal} handleClose={handleCloseModal} />
+            <AddImageModal show={showModal} handleClose={handleCloseModal} images={images} setImages={setImages} />
             
         </div>
     )
