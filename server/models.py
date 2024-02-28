@@ -2,6 +2,7 @@ from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import validates
 from sqlalchemy.ext.hybrid import hybrid_property
+from validateImage import Validate
 
 from config import db, bcrypt
 
@@ -56,6 +57,18 @@ class Image(db.Model, SerializerMixin):
     user = db.relationship('User', back_populates='images')
 
     serialize_only = ('id', 'user_id', 'name', 'url')
+
+    @validates('url')
+    def validate_url(self, key, url):
+        validation_result = Validate.imageUrl(url=url)
+        if not validation_result:
+            raise ValueError("Couldn't process that URL")
+        elif validation_result == 0:
+            raise ValueError("Face not detected in image")
+        elif validation_result > 1:
+            raise ValueError("Multiple faces detected")
+        else:
+            return url
 
     def __repr__(self) -> str:
         return f'Image {self.id}: {self.name}'
