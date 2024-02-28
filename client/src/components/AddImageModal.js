@@ -1,7 +1,53 @@
-import React from "react";
+import React, { useState } from "react";
+import { useFormik } from "formik";
+import * as yup from "yup";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { Modal, Button, Form } from "react-bootstrap";
 
 function AddImageModal({ show, handleClose }) {
+
+
+    const [errors, setErrors] = useState([])
+    const history = useHistory()
+
+    const formSchema = yup.object().shape({
+        name: yup.string().required("Please enter a name").max(20, "Name must be 20 characters or fewer"),
+        url: yup.string().required("Please enter an image url")
+    })
+
+    const formik = useFormik({
+        initialValues: {
+            name: "",
+            url: ""
+        },
+        validationSchema: formSchema,
+        validateOnChange: false,
+        validateOnBlur: false,
+        onSubmit: (values) => {
+            
+            setErrors([])
+            fetch("/api/images", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(values),
+            }).then(r => {
+                if (r.ok) {
+                     
+                    history.push('/')    
+                } else {
+                    r.json().then(err => {
+                        
+                        console.log(err.errors)
+                        setErrors(err.errors)
+                    })
+                }
+            })
+        }
+    })
+
+
     return (
         <Modal show={show} >
             <Modal.Header>

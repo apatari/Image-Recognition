@@ -33,6 +33,7 @@ if __name__ == '__main__':
 
         images = [
             Image(name='Harry', user_id='1', url='https://upload.wikimedia.org/wikipedia/en/d/d7/Harry_Potter_character_poster.jpg'),
+            Image(name='Harry', user_id='2', url='https://upload.wikimedia.org/wikipedia/en/d/d7/Harry_Potter_character_poster.jpg'),
             Image(name='Hermoine', user_id='1', url='https://i0.wp.com/the-art-of-autism.com/wp-content/uploads/2022/12/Hermione-Granger.jpg?fit=450%2C600&ssl=1'),
             Image(name='Ron', user_id='1', url='https://upload.wikimedia.org/wikipedia/en/5/5e/Ron_Weasley_poster.jpg'),
             Image(name='Snape', user_id='1', url='https://upload.wikimedia.org/wikipedia/en/b/b9/Ootp076.jpg'),
