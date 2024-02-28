@@ -31,7 +31,7 @@ function Library() {
                 </Col>
                 <Col lg={5} >
                     <InputGroup className="mb-3 ">
-                        <InputGroup.Text variant="info" id="button-addon1" onClick={handleSearchClick} >
+                        <InputGroup.Text variant="info" id="button-addon1" >
                             Search
                         </InputGroup.Text>
                         <Form.Control
