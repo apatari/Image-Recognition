@@ -7,13 +7,11 @@ function Library() {
 
     const [images, setImages] = useState([])
     const [searchText, setSearchText] = useState("")
-    const [imagesToDisplay, setImagesToDisplay] = useState([])
 
     const handleSearchChange = (e) => {
         setSearchText(e.target.value)
     }
 
-    
 
     useEffect(() => {
         fetch('/api/images')
@@ -21,10 +19,7 @@ function Library() {
         .then(data => setImages(data))
     }, [])
 
-    
-    const handleSearchClick = () => {
-        
-    }
+
 
     return (
         <div className="m-4" >
