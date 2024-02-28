@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button, Row, Col, InputGroup, Form } from "react-bootstrap";
-import ImageCard from "./ImageCard";
+import ImageCard from "./ImageCards"
 
 
 function Library() {
