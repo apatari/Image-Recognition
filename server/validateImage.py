@@ -23,4 +23,4 @@ class Validate:
 
 
         except:
-            return False
+            return -1

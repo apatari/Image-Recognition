@@ -61,10 +61,10 @@ class Image(db.Model, SerializerMixin):
     @validates('url')
     def validate_url(self, key, url):
         validation_result = Validate.imageUrl(url=url)
-        if not validation_result:
-            raise ValueError("Couldn't process that URL")
-        elif validation_result == 0:
+        if validation_result == 0 :
             raise ValueError("Face not detected in image")
+        elif validation_result == -1:
+            raise ValueError("Couldn't process that URL")
         elif validation_result > 1:
             raise ValueError("Multiple faces detected")
         else:
