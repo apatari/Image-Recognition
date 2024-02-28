@@ -10,7 +10,34 @@ function AddImageModal({ show, handleClose }) {
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                Form here
+                <Form>
+                    <Form.Group className="m-3 form-floating" >
+                        <Form.Control
+                            type="text" 
+                            name="name" 
+                            id="name" 
+                            placeholder="Name"
+                            // value={formik.values.name}
+                            // onChange={formik.handleChange} 
+                        >
+                        </Form.Control>
+                        <Form.Label> Name </Form.Label>
+                    </Form.Group>
+
+                    <Form.Group className="m-3 form-floating" >
+                        <Form.Control
+                            type="text" 
+                            name="url" 
+                            id="url" 
+                            placeholder="Image URL"
+                            // value={formik.values.url}
+                            // onChange={formik.handleChange} 
+                        >
+                        </Form.Control>
+                        <Form.Label> Image URL </Form.Label>
+
+                    </Form.Group>
+                </Form>
                 
             </Modal.Body>
             <Modal.Footer>
