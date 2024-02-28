@@ -102,6 +102,26 @@ class ImageIndex(Resource):
         images = [image.to_dict() for image in Image.query.filter_by(user_id=user_id).all()]
 
         return images, 200
+    
+    def post(self):
+
+        json = request.get_json()
+        user_id = session.get('user_id')
+
+        if not user_id:
+            return {"errors": "user not logged in"}, 422
+
+        try:
+            name = json['name']
+            url = json['url']
+            img = Image(user_id=user_id, name=name, url=url)
+            db.session.add(img)
+            db.session.commit()
+
+            return img.to_dict(), 201
+        except Exception as err:
+            return {"errors": [str(err)]}, 422
+
 
 api.add_resource(ImageIndex, '/api/images')
 api.add_resource(ImageScan, '/api/image_scan')
