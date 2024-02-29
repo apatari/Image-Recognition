@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { Modal, Button, Form } from "react-bootstrap";
+import { Modal, Button, Form, Col, Row } from "react-bootstrap";
+import ImageCard from "./ImageCards";
 
 function AddImageModal({ show, handleClose, images, setImages }) {
 
 
     const [errors, setErrors] = useState([])
+    const [showPreview, setShowPreview] = useState(false)
     const history = useHistory()
 
     const formSchema = yup.object().shape({
@@ -37,6 +39,8 @@ function AddImageModal({ show, handleClose, images, setImages }) {
                     r.json().then(data => {
                         
                         setImages([...images, data])
+                        formik.resetForm()
+                        setShowPreview(false)
                         handleClose() 
                     // history.push('/')
                     } )
@@ -63,39 +67,58 @@ function AddImageModal({ show, handleClose, images, setImages }) {
             <Form onSubmit={formik.handleSubmit} >
             <Modal.Body>
                 
-                    <Form.Group className="m-3 form-floating" >
-                        <Form.Control
-                            type="text" 
-                            name="name" 
-                            id="name" 
-                            placeholder="Name"
-                            value={formik.values.name}
-                            onChange={formik.handleChange} 
-                        >
-                        </Form.Control>
-                        <Form.Label> Name </Form.Label>
-                    </Form.Group>
-                    {formik.errors.name? <p className="ms-4 text-danger" >{formik.errors.name}</p> : ""}
-                    <Form.Group className="m-3 form-floating" >
-                        <Form.Control
-                            type="text" 
-                            name="url" 
-                            id="url" 
-                            placeholder="Image URL"
-                            value={formik.values.url}
-                            onChange={formik.handleChange} 
-                        >
-                        </Form.Control>
-                        <Form.Label> Image URL </Form.Label>
+                <Form.Group className="m-3 mb-4 form-floating" >
+                    <Form.Control
+                        type="text" 
+                        name="name" 
+                        id="name" 
+                        placeholder="Name"
+                        value={formik.values.name}
+                        onChange={formik.handleChange} 
+                    >
+                    </Form.Control>
+                    <Form.Label> Name </Form.Label>
+                </Form.Group>
+                {formik.errors.name? <p className="ms-4 text-danger" >{formik.errors.name}</p> : ""}
+                <p className="my-2 " > <strong>Image URL must link to an image with exactly one face:</strong> </p>
+                <Form.Group className="m-3 form-floating" >
+                    <Form.Control
+                        type="text" 
+                        name="url" 
+                        id="url" 
+                        placeholder="Image URL"
+                        value={formik.values.url}
+                        onChange={ (e) => {
+                            formik.handleChange(e)
+                            setShowPreview(false)
+                        }} 
+                    >
+                    </Form.Control>
+                    <Form.Label> Image URL </Form.Label>
 
-                    </Form.Group>
-                    {formik.errors.url? <p className="ms-4 text-danger" >{formik.errors.url}</p> : ""}
-                    {errors.map(error => <p className="text-danger ms-4" key={error} >{error}</p>)}
+                </Form.Group>
+                {formik.errors.url? <p className="ms-4 text-danger" >{formik.errors.url}</p> : ""}
+                {errors.map(error => <p className="text-danger ms-4" key={error} >{error}</p>)}
+                <Row className="m-3" >
+
+               
+                <Col>
+                    <Button onClick={() => setShowPreview(true)} >Show Preview</Button>
+                </Col>
+                <Col>
+                    {showPreview? <div  className="ms-4" >  <ImageCard image={{"name":formik.values.name, "url":formik.values.url}} /></div>:""}
+
+                </Col>
+                </Row>
                 
             </Modal.Body>
             <Modal.Footer>
                 <Button className="me-auto" type="submit" >Add</Button>
-                <Button className="btn-secondary" onClick={handleClose} >Cancel</Button>
+                <Button className="btn-secondary" onClick={() => {
+                    handleClose()
+                    formik.resetForm()
+                    setShowPreview(false)
+                    }} >Cancel</Button>
             </Modal.Footer>
             </Form>
         </Modal>
