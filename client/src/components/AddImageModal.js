@@ -90,7 +90,7 @@ function AddImageModal({ show, handleClose, images, setImages }) {
 
                     </Form.Group>
                     {formik.errors.url? <p className="ms-4 text-danger" >{formik.errors.url}</p> : ""}
-                
+                    {errors.map(error => <p className="text-danger ms-4" key={error} >{error}</p>)}
                 
             </Modal.Body>
             <Modal.Footer>
