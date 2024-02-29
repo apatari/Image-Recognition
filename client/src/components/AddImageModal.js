@@ -7,10 +7,14 @@ import ImageCard from "./ImageCards";
 
 function AddImageModal({ show, handleClose, images, setImages }) {
 
-
     const [errors, setErrors] = useState([])
     const [showPreview, setShowPreview] = useState(false)
     const history = useHistory()
+
+    const handleImageError = () => {
+        setShowPreview(false)
+        setErrors((current) => [...current, "Image URL not working, try another"])
+    }
 
     const formSchema = yup.object().shape({
         name: yup.string().required("Please enter a name").max(20, "Name must be 20 characters or fewer"),
@@ -42,7 +46,7 @@ function AddImageModal({ show, handleClose, images, setImages }) {
                         formik.resetForm()
                         setShowPreview(false)
                         handleClose() 
-                    // history.push('/')
+                    
                     } )
                         
                 } else {
@@ -55,7 +59,6 @@ function AddImageModal({ show, handleClose, images, setImages }) {
             })
         }
     })
-
 
     return (
         <Modal show={show} >
@@ -103,10 +106,13 @@ function AddImageModal({ show, handleClose, images, setImages }) {
 
                
                 <Col>
-                    <Button onClick={() => setShowPreview((prev => !prev))} >Toggle Preview</Button>
+                    <Button onClick={() => {
+                        setShowPreview((prev => !prev))
+                        setErrors([])
+                        }} >Toggle Preview</Button>
                 </Col>
                 <Col>
-                    {showPreview? <div  className="ms-4" >  <ImageCard image={{"name":formik.values.name, "url":formik.values.url}} /></div>:""}
+                    {showPreview? <div onError={handleImageError} className="ms-4" >  <ImageCard image={{"name":formik.values.name, "url":formik.values.url}} /></div>:""}
 
                 </Col>
                 </Row>
