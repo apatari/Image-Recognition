@@ -40,7 +40,7 @@ function LoginForm({ onLogin }) {
                 } else {
                     r.json().then(err => {
                         // setIsLoading(false)
-                        console.log(err.errors)
+                        
                         setErrors(err.errors)
                     })
                 }
