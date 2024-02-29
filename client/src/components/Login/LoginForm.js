@@ -66,7 +66,7 @@ function LoginForm({ onLogin }) {
                         </Form.Control>
                         <Form.Label> Username </Form.Label>
                     </Form.Group>
-
+                    {formik.errors.username? <p className="ms-4 text-danger" >{formik.errors.username}</p> : ""}
                     <Form.Group className="m-3 form-floating" >
                         <Form.Control
                             type="password" 
@@ -80,9 +80,9 @@ function LoginForm({ onLogin }) {
                         <Form.Label> Password </Form.Label>
 
                     </Form.Group>
-
+                    {formik.errors.password? <p className="ms-4 text-danger" >{formik.errors.password}</p> : ""}
+                    {errors.map(error => <p className="ms-4 text-danger" key={error}>{error}</p>)}
                     <Button className="m-3" variant="primary" type="submit" >Log In</Button>
-
                 </Form>
             </Col>
         </div>
