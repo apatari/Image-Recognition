@@ -103,7 +103,7 @@ function AddImageModal({ show, handleClose, images, setImages }) {
 
                
                 <Col>
-                    <Button onClick={() => setShowPreview(true)} >Show Preview</Button>
+                    <Button onClick={() => setShowPreview((prev => !prev))} >Toggle Preview</Button>
                 </Col>
                 <Col>
                     {showPreview? <div  className="ms-4" >  <ImageCard image={{"name":formik.values.name, "url":formik.values.url}} /></div>:""}
