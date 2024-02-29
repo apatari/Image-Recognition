@@ -44,7 +44,7 @@ function AddImageModal({ show, handleClose, images, setImages }) {
                 } else {
                     r.json().then(err => {
                         
-                        console.log(err.errors)
+                        
                         setErrors(err.errors)
                     })
                 }
