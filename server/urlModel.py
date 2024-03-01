@@ -36,7 +36,7 @@ class Url:
 
 
     # * Then take the coordinates, create a series of face images, look for matches in db
-    #     and add a name key/value to all coordinates, with false for unknowns
+    #     and add a name key/value to all coordinates, with unknowns simply named "Unknown"
 
     def getNames(self, user_id, tolerance=0.6):
 
