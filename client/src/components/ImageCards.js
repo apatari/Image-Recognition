@@ -11,9 +11,9 @@ function ImageCard({ image }) {
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>
-                    <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                    <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                    <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                    <Dropdown.Item onClick={() => console.log(`editing ${image.id}` )}>Edit</Dropdown.Item>
+                    <Dropdown.Item onClick={() => console.log(`deleting ${image.id}`)}>Delete</Dropdown.Item>
+                    
                 </Dropdown.Menu>
             </Dropdown>
             <Card.Body className="d-flex" >
