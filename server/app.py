@@ -121,8 +121,23 @@ class ImageIndex(Resource):
             return img.to_dict(), 201
         except Exception as err:
             return {"errors": [str(err)]}, 422
+        
+class ImageByID(Resource):
+    def delete(self, id):
+
+        image = Image.query.get(id)
+
+        if not image:
+            return {"error": "That image doesn't exist"}, 404
+        else:
+            db.session.delete(image)
+            db.session.commit()
+
+            return {}, 204
+        
 
 
+api.add_resource(ImageByID, '/api/images/<int:id>')
 api.add_resource(ImageIndex, '/api/images')
 api.add_resource(ImageScan, '/api/image_scan')
 api.add_resource(Login, '/api/login')
