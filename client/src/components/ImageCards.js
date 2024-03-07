@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card, Dropdown } from "react-bootstrap";
+import EditModal from "./EditModal";
 
 function ImageCard({ image }) {
+
+    const [showEdit, setShowEdit] = useState(false)
+
     return (
         <Card style={{ width: '12rem' }} className="m-2 p-2 bg-secondary bg-opacity-25 border-0" >
             <Card.Img variant="top" src={image.url}  className="rounded" style={{position: "relative"}} />
@@ -11,7 +15,7 @@ function ImageCard({ image }) {
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>
-                    <Dropdown.Item onClick={() => console.log(`editing ${image.id}` )}>Edit</Dropdown.Item>
+                    <Dropdown.Item onClick={() => setShowEdit(true)}>Edit</Dropdown.Item>
                     <Dropdown.Item onClick={() => console.log(`deleting ${image.id}`)}>Delete</Dropdown.Item>
                     
                 </Dropdown.Menu>
@@ -19,6 +23,10 @@ function ImageCard({ image }) {
             <Card.Body className="d-flex" >
                 <Card.Title className="mt-auto" >{image.name}</Card.Title>
             </Card.Body>
+
+            <EditModal showEdit={showEdit} setShowEdit={setShowEdit} />
+
+
         </Card>
     )
 }
