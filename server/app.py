@@ -125,7 +125,7 @@ class ImageIndex(Resource):
 class ImageByID(Resource):
     def delete(self, id):
 
-        image = Image.query.get(id)
+        image = Image.query.filter_by(id=id).first()
 
         if not image:
             return {"error": "That image doesn't exist"}, 404
@@ -137,7 +137,7 @@ class ImageByID(Resource):
         
     def patch(self, id):
 
-        image = Image.query.get(id)
+        image = Image.query.filter_by(id=id).first()
         json = request.get_json()
 
         if not image:
