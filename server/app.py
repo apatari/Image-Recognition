@@ -135,6 +135,25 @@ class ImageByID(Resource):
 
             return {}, 204
         
+    def patch(self, id):
+
+        image = Image.query.get(id)
+        json = request.get_json()
+
+        if not image:
+            return {"error": "Image not found"}, 404
+        try:
+            image.name = json['name']
+            image.url = json['url']
+
+            db.session.add(image)
+            db.session.commit()
+
+            return image.to_dict(), 201
+        except Exception as err:
+            return {"errors": [str(err)]}, 422
+
+        
 
 
 api.add_resource(ImageByID, '/api/images/<int:id>')
