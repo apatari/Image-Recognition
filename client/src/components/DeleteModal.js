@@ -33,7 +33,7 @@ export default function DeleteModal({ showDelete , setShowDelete, image, images,
             </Modal.Header>
             <Modal.Body className="fs-4 " >
                 <ImageCard image={image} setImages={setImages} images={images} showMenu={false} />
-                Are you sure?  This action is permanent.
+                Are you sure?
             </Modal.Body>
             <Modal.Footer>
             <Button variant="secondary" onClick={handleClose} className="me-auto" >
