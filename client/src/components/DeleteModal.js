@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
+import ImageCard from "./ImageCards";
 
 export default function DeleteModal({ showDelete , setShowDelete, image, images, setImages }) {
 
@@ -28,11 +29,14 @@ export default function DeleteModal({ showDelete , setShowDelete, image, images,
             {/* Note: show the image and name so users can be sure */}
 
             <Modal.Header closeButton>
-            <Modal.Title>Delete Image</Modal.Title>
+            <Modal.Title>Delete Image:</Modal.Title>
             </Modal.Header>
-            <Modal.Body>Are you sure?</Modal.Body>
+            <Modal.Body className="fs-4 " >
+                <ImageCard image={image} setImages={setImages} images={images} showMenu={false} />
+                Are you sure?  This action is permanent.
+            </Modal.Body>
             <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
+            <Button variant="secondary" onClick={handleClose} className="me-auto" >
                 Close
             </Button>
             <Button variant="danger" onClick={handleDelete}>

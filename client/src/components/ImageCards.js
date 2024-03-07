@@ -3,7 +3,7 @@ import { Card, Dropdown } from "react-bootstrap";
 import EditModal from "./EditModal";
 import DeleteModal from "./DeleteModal";
 
-function ImageCard({ image, images, setImages }) {
+function ImageCard({ image, images, setImages, showMenu }) {
 
     const [showEdit, setShowEdit] = useState(false)
     const [showDelete, setShowDelete] = useState(false)
@@ -11,6 +11,7 @@ function ImageCard({ image, images, setImages }) {
     return (
         <Card style={{ width: '12rem' }} className="m-2 p-2 bg-secondary bg-opacity-25 border-0" >
             <Card.Img variant="top" src={image.url}  className="rounded" style={{position: "relative"}} />
+            {showMenu? 
             <Dropdown   style={{position: "absolute", top:"12px", right: "28px", width:"20px", textAlign:"center"}} >
                 <Dropdown.Toggle variant="secondary" id="dropdown-basic" style={{opacity: "45%"}} >
                     
@@ -21,7 +22,7 @@ function ImageCard({ image, images, setImages }) {
                     <Dropdown.Item onClick={() => setShowDelete(true)}>Delete</Dropdown.Item>
                     
                 </Dropdown.Menu>
-            </Dropdown>
+            </Dropdown>: ""}
             <Card.Body className="d-flex" >
                 <Card.Title className="mt-auto" >{image.name}</Card.Title>
             </Card.Body>
