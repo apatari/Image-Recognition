@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { Card, Dropdown } from "react-bootstrap";
 import EditModal from "./EditModal";
+import DeleteModal from "./DeleteModal";
 
-function ImageCard({ image }) {
+function ImageCard({ image, images, setImages }) {
 
     const [showEdit, setShowEdit] = useState(false)
+    const [showDelete, setShowDelete] = useState(false)
 
     return (
         <Card style={{ width: '12rem' }} className="m-2 p-2 bg-secondary bg-opacity-25 border-0" >
@@ -16,7 +18,7 @@ function ImageCard({ image }) {
 
                 <Dropdown.Menu>
                     <Dropdown.Item onClick={() => setShowEdit(true)}>Edit</Dropdown.Item>
-                    <Dropdown.Item onClick={() => console.log(`deleting ${image.id}`)}>Delete</Dropdown.Item>
+                    <Dropdown.Item onClick={() => setShowDelete(true)}>Delete</Dropdown.Item>
                     
                 </Dropdown.Menu>
             </Dropdown>
@@ -24,8 +26,8 @@ function ImageCard({ image }) {
                 <Card.Title className="mt-auto" >{image.name}</Card.Title>
             </Card.Body>
 
-            <EditModal showEdit={showEdit} setShowEdit={setShowEdit} />
-
+            <EditModal showEdit={showEdit} setShowEdit={setShowEdit} image={image} />
+            <DeleteModal showDelete={showDelete} setShowDelete={setShowDelete} image={image} images={images} setImages={setImages} />
 
         </Card>
     )

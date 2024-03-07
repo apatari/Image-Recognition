@@ -49,7 +49,7 @@ function Library() {
                 </Col>
             </Row>
             <Row className="d-flex flex-wrap" >
-                {images.filter(image => image.name.toLowerCase().includes(searchText.toLowerCase())).map(image => <ImageCard key={image.id} image={image} /> )}
+                {images.filter(image => image.name.toLowerCase().includes(searchText.toLowerCase())).map(image => <ImageCard key={image.id} image={image} images={images} setImages={setImages} /> )}
             </Row>
 
             <AddImageModal show={showModal} handleClose={handleCloseModal} images={images} setImages={setImages} />
