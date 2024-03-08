@@ -28,7 +28,7 @@ function ImageCard({ image, images, setImages, showMenu }) {
                 <Card.Title className="mt-auto" >{image.name}</Card.Title>
             </Card.Body>
 
-            <AddImageModal show={showEdit} handleClose={() => setShowEdit(false)} images={images} setImages={setImages} mode={"Edit"} />
+            <AddImageModal  image={image} show={showEdit} handleClose={() => setShowEdit(false)} images={images} setImages={setImages} mode={"Edit"} />
             <DeleteModal showDelete={showDelete} setShowDelete={setShowDelete} image={image} images={images} setImages={setImages} />
 
         </Card>

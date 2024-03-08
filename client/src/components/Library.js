@@ -54,7 +54,7 @@ function Library() {
                 } )}
             </Row>
 
-            <AddImageModal show={showModal} handleClose={handleCloseModal} images={images} setImages={setImages} mode={"Add"} />
+            <AddImageModal image={null} show={showModal} handleClose={handleCloseModal} images={images} setImages={setImages} mode={"Add"} />
             
         </div>
     )

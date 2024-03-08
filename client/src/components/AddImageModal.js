@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { Modal, Button, Form, Col, Row } from "react-bootstrap";
 import ImageCard from "./ImageCards";
 
-function AddImageModal({ show, handleClose, images, setImages, mode }) {
+function AddImageModal({ show, handleClose, images, setImages, mode, image }) {
 
     const [errors, setErrors] = useState([])
     const [showPreview, setShowPreview] = useState(false)
@@ -23,14 +23,15 @@ function AddImageModal({ show, handleClose, images, setImages, mode }) {
 
     const formik = useFormik({
         initialValues: {
-            name: "",
-            url: ""
+            name: ((mode === "Edit")? image.name:""),
+            url: ((mode === "Edit")? image.url:"")
         },
         validationSchema: formSchema,
         validateOnChange: false,
         validateOnBlur: false,
+        enableReinitialize: true,
         onSubmit: (values) => {
-            
+          if (mode === "Add") {  
             setErrors([])
             fetch("/api/images", {
                 method: "POST",
@@ -57,7 +58,43 @@ function AddImageModal({ show, handleClose, images, setImages, mode }) {
                     })
                 }
             })
+        } else {
+              
+            setErrors([])
+            fetch(`/api/images/${image.id}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(values),
+            }).then(r => {
+                if (r.ok) {
+                    r.json().then(data => {
+                        
+                        const newImages = (images.map( img => {
+                            if (img.id !== data.id) {
+                                return img
+                            } else {
+                                return data
+                            }
+                        }))
+                        setImages(newImages)
+                        formik.resetForm()
+                        setShowPreview(false)
+                        handleClose() 
+                    
+                    } )
+                        
+                } else {
+                    r.json().then(err => {
+                        
+                        
+                        setErrors(err.errors)
+                    })
+                }
+            })
         }
+    }
     })
 
     return (
