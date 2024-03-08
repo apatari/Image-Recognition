@@ -22,7 +22,7 @@ class ImageScan(Resource):
         user_id = request.get_json()['user_id']
 
         try:
-            data = Url(url=url).getNames(user_id)['data']
+            data = Url(url=url).getNames(user_id)
 
             if len(data) == 0:
                 return {"errors": ["No faces detected in that image"]}, 422
