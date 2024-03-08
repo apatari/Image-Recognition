@@ -21,10 +21,15 @@ class ImageScan(Resource):
         url = request.get_json()['url']
         user_id = request.get_json()['user_id']
 
-        # get the userid from session
-        data = Url(url=url).getNames(user_id)
+        try:
+            data = Url(url=url).getNames(user_id)['data']
 
-        return {"data":data}, 200
+            if len(data) == 0:
+                return {"errors": ["No faces detected in that image"]}, 422
+
+            return {"data":data}, 200
+        except:
+            return {"errors": ["Invalid image URL"]}, 422
     
 class Login(Resource):
 
