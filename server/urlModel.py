@@ -80,6 +80,7 @@ class Url:
 
                 
                 unknown_image = face_recognition.load_image_file('target.jpg')
+                os.remove('target.jpg')
                 
    
                 for encoding in em_encodings:                 
@@ -103,7 +104,7 @@ class Url:
             # delete bigpicture, dbImage and target
             os.remove('bigPicture.jpg')
             os.remove('dbImage.jpg')
-            os.remove('target.jpg')
+            
             return res
 
 
