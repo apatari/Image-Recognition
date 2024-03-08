@@ -8,7 +8,7 @@ function ImageScan() {
 
   const [user, setUser] = useContext(UserContext)
 
-  const PHOTO = "https://media.vanityfair.com/photos/597f32fff3c6f80e768c7fc4/1:1/w_916,h_916,c_limit/daenerys-game-of-thrones-recap.jpg"
+  const PHOTO = "https://deadline.com/wp-content/uploads/2023/04/MCDHAPO_EC151.jpg?w=800"
 
   const [imageData, setImageData] = useState({"data":[]})
 
