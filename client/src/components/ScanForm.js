@@ -6,6 +6,7 @@ export default function ScanForm() {
 
     const[scanUrl, setScanUrl] = useState("")
     const [errors, setErrors] = useState([])
+    const [validImage, setValidImage] = useState(false)
 
     const [user] = useContext(UserContext)
 

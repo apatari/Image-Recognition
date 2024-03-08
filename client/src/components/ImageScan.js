@@ -4,21 +4,22 @@ import ImageWithNames from "./ImageWithNames";
 import { Spinner } from "react-bootstrap"
 import { UserContext } from "./App";
 
-function ImageScan() {
+function ImageScan({ url }) {
 
-  const [user, setUser] = useContext(UserContext)
+  const [user] = useContext(UserContext)
 
-  const PHOTO = "https://deadline.com/wp-content/uploads/2023/04/MCDHAPO_EC151.jpg?w=800"
 
   const [imageData, setImageData] = useState({"data":[]})
 
+
+  // this should be moved up to scan form, we're already making this call there.
   useEffect(() => {
     fetch('/api/image_scan', {
       method: "POST", 
       headers: {
         "Content-Type": 'application/json'
       },
-      body: JSON.stringify({"url": PHOTO})
+      body: JSON.stringify({"url": url})
     })
     .then(res => res.json())
     .then(data => {
@@ -38,7 +39,8 @@ function ImageScan() {
   return (
     <div className="m-3" >
       {user.id}
-      <ImageWithNames imageData={imageData} PHOTO={PHOTO} />
+      {/* change photo to url in component */}
+      <ImageWithNames imageData={imageData} PHOTO={url} />
       
       
     </div>
