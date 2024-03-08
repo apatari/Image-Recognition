@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Card, Dropdown } from "react-bootstrap";
-import EditModal from "./EditModal";
+
 import DeleteModal from "./DeleteModal";
 import AddImageModal from "./AddImageModal";
 
