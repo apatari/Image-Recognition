@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Card, Dropdown } from "react-bootstrap";
 import EditModal from "./EditModal";
 import DeleteModal from "./DeleteModal";
+import AddImageModal from "./AddImageModal";
 
 function ImageCard({ image, images, setImages, showMenu }) {
 
@@ -27,7 +28,7 @@ function ImageCard({ image, images, setImages, showMenu }) {
                 <Card.Title className="mt-auto" >{image.name}</Card.Title>
             </Card.Body>
 
-            <EditModal showEdit={showEdit} setShowEdit={setShowEdit} image={image} />
+            <AddImageModal show={showEdit} handleClose={() => setShowEdit(false)} images={images} setImages={setImages} mode={"Edit"} />
             <DeleteModal showDelete={showDelete} setShowDelete={setShowDelete} image={image} images={images} setImages={setImages} />
 
         </Card>

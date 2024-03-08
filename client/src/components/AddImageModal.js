@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { Modal, Button, Form, Col, Row } from "react-bootstrap";
 import ImageCard from "./ImageCards";
 
-function AddImageModal({ show, handleClose, images, setImages }) {
+function AddImageModal({ show, handleClose, images, setImages, mode }) {
 
     const [errors, setErrors] = useState([])
     const [showPreview, setShowPreview] = useState(false)
@@ -64,7 +64,7 @@ function AddImageModal({ show, handleClose, images, setImages }) {
         <Modal show={show} >
             <Modal.Header>
                 <Modal.Title>
-                    Add Image
+                    {mode} Image
                 </Modal.Title>
             </Modal.Header>
             <Form onSubmit={formik.handleSubmit} >
@@ -119,7 +119,7 @@ function AddImageModal({ show, handleClose, images, setImages }) {
                 
             </Modal.Body>
             <Modal.Footer>
-                <Button className="me-auto" type="submit" >Add</Button>
+                <Button className="me-auto" type="submit" >{mode}</Button>
                 <Button className="btn-secondary" onClick={() => {
                     handleClose()
                     formik.resetForm()
