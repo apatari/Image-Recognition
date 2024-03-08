@@ -5,6 +5,7 @@ import ImageScan from "./ImageScan";
 import Login from "./Login/Login";
 import Header from "./Header";
 import Library from "./Library";
+import ScanForm from "./ScanForm";
 
 export const UserContext = createContext(null)
 
@@ -43,7 +44,7 @@ function App() {
         </Switch>
         <Switch>
           <Route exact path="/scan" >
-            <ImageScan />
+            <ScanForm />
           </Route>
         </Switch>
 
