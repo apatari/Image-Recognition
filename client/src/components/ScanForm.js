@@ -26,6 +26,7 @@ export default function ScanForm() {
         })
         .then(res => {
             if (res.ok) {
+                res.json().then(data =>console.log(data))
                 console.log("good image")
             } else {
                 res.json().then(err => setErrors(err.errors))
