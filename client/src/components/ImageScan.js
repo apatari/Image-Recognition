@@ -19,7 +19,7 @@ function ImageScan({ url, imageData }) {
 
   return (
     <div className="m-3" >
-      {user.id}
+      
       {/* change photo to url in component */}
       <ImageWithNames imageData={imageData} PHOTO={url} />
       
