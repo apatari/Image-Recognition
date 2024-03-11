@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Form, Col, Row, Button } from "react-bootstrap";
+import { Form, Col, Row, Button, Spinner } from "react-bootstrap";
 import { UserContext } from "./App";
 import ImageScan from "./ImageScan";
 
@@ -10,8 +10,10 @@ export default function ScanForm() {
     const [errors, setErrors] = useState([])
     const [enteredImage, setEnteredImage] = useState(false)
     const [imageData, setImageData] = useState({"data":[]})
+    const [isLoading, setIsLoading] = useState(false)
 
     const handleImageError = () => {
+        setIsLoading(false)
         setImageData({"data": []})
     }
 
@@ -23,6 +25,7 @@ export default function ScanForm() {
     }
 
     const handleScanClick = () => {
+        setIsLoading(true)
         setEnteredImage(true)
         setScanUrl(formText)
     }
@@ -74,6 +77,9 @@ export default function ScanForm() {
                 </Form>
 
                 <Button className="" onClick={handleScanClick} >Scan</Button>
+                
+                {(isLoading && imageData.data.length == 0)? <div className="m-4" > <Spinner animation="grow" /> Loading</div>: ""}
+
                 <div>
                     { (imageData.data.length > 0)? <div onError={handleImageError} > <ImageScan url={scanUrl} imageData={imageData} /></div>: ""}
                 </div>
