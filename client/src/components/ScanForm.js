@@ -11,6 +11,10 @@ export default function ScanForm() {
     const [enteredImage, setEnteredImage] = useState(false)
     const [imageData, setImageData] = useState({"data":[]})
 
+    const handleImageError = () => {
+        setImageData({"data": []})
+    }
+
     const [user] = useContext(UserContext)
 
 
@@ -71,7 +75,7 @@ export default function ScanForm() {
 
                 <Button className="" onClick={handleScanClick} >Scan</Button>
                 <div>
-                    { (imageData.data.length > 0)? <ImageScan url={scanUrl} imageData={imageData} />: ""}
+                    { (imageData.data.length > 0)? <div onError={handleImageError} > <ImageScan url={scanUrl} imageData={imageData} /></div>: ""}
                 </div>
 
                     
