@@ -9,22 +9,6 @@ function ImageScan({ url, imageData }) {
   const [user] = useContext(UserContext)
 
 
-  // // this should be moved up to scan form, we're already making this call there.
-  // useEffect(() => {
-  //   fetch('/api/image_scan', {
-  //     method: "POST", 
-  //     headers: {
-  //       "Content-Type": 'application/json'
-  //     },
-  //     body: JSON.stringify({"url": url})
-  //   })
-  //   .then(res => res.json())
-  //   .then(data => {
-  //     setImageData(data)
-  //     console.log(data)
-  //   })
-  // }, [])
-
   if (!imageData.data.length > 0) {
     return (
       <div className="m-4" >
