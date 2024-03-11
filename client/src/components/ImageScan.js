@@ -4,29 +4,26 @@ import ImageWithNames from "./ImageWithNames";
 import { Spinner } from "react-bootstrap"
 import { UserContext } from "./App";
 
-function ImageScan({ url }) {
+function ImageScan({ url, imageData }) {
 
   const [user] = useContext(UserContext)
 
 
-  const [imageData, setImageData] = useState({"data":[]})
-
-
-  // this should be moved up to scan form, we're already making this call there.
-  useEffect(() => {
-    fetch('/api/image_scan', {
-      method: "POST", 
-      headers: {
-        "Content-Type": 'application/json'
-      },
-      body: JSON.stringify({"url": url})
-    })
-    .then(res => res.json())
-    .then(data => {
-      setImageData(data)
-      console.log(data)
-    })
-  }, [])
+  // // this should be moved up to scan form, we're already making this call there.
+  // useEffect(() => {
+  //   fetch('/api/image_scan', {
+  //     method: "POST", 
+  //     headers: {
+  //       "Content-Type": 'application/json'
+  //     },
+  //     body: JSON.stringify({"url": url})
+  //   })
+  //   .then(res => res.json())
+  //   .then(data => {
+  //     setImageData(data)
+  //     console.log(data)
+  //   })
+  // }, [])
 
   if (!imageData.data.length > 0) {
     return (

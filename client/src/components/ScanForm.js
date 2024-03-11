@@ -1,12 +1,14 @@
 import React, { useState, useContext } from "react";
 import { Form, Col, Row, Button } from "react-bootstrap";
 import { UserContext } from "./App";
+import ImageScan from "./ImageScan";
 
 export default function ScanForm() {
 
     const[scanUrl, setScanUrl] = useState("")
     const [errors, setErrors] = useState([])
     const [validImage, setValidImage] = useState(false)
+    const [imageData, setImageData] = useState({"data":[]})
 
     const [user] = useContext(UserContext)
 
@@ -26,7 +28,9 @@ export default function ScanForm() {
         })
         .then(res => {
             if (res.ok) {
-                res.json().then(data =>console.log(data))
+                res.json().then(data =>{
+                    setImageData(data)
+                })
                 console.log("good image")
             } else {
                 res.json().then(err => setErrors(err.errors))
@@ -55,6 +59,9 @@ export default function ScanForm() {
                 </Form>
 
                 <Button className="" onClick={handleScanClick} >Scan</Button>
+                <div>
+                    { (imageData.data.length > 0)? <ImageScan url={scanUrl} imageData={imageData} />: ""}
+                </div>
 
                     
            
