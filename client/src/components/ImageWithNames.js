@@ -1,6 +1,10 @@
 import React from "react";
+import { v4 as uuid } from "uuid"
 
 function ImageWithNames ({ imageData, PHOTO }) {
+
+    const newId = uuid()
+
     return (
         <div>
 
@@ -14,7 +18,7 @@ function ImageWithNames ({ imageData, PHOTO }) {
 
             {imageData.data.map((item) => {
                 return (
-                    <div>
+                    <div key={uuid()} >
                         <div 
                             style={{
                                 position:'absolute', 
