@@ -25,6 +25,7 @@ export default function ScanForm() {
     }
 
     const handleScanClick = () => {
+        setImageData({"data":[]})
         setIsLoading(true)
         setEnteredImage(true)
         setScanUrl(formText)
