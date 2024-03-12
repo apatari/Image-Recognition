@@ -25,6 +25,11 @@ export default function ScanForm() {
     }
 
     const handleScanClick = () => {
+
+        if (scanUrl === "") { 
+            return
+        }
+
         setImageData({"data":[]})
         setIsLoading(true)
         setEnteredImage(true)
@@ -34,7 +39,9 @@ export default function ScanForm() {
     
 
     const handleScanRender = () => {
-       
+        if (scanUrl === "") { 
+            return
+        }
         setErrors([])
         fetch('/api/image_scan', {
             method: "POST",
