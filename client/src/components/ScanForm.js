@@ -57,7 +57,10 @@ export default function ScanForm() {
                 })
                 console.log("good image")
             } else {
-                res.json().then(err => setErrors(err.errors))
+                res.json().then(err => {
+                    setErrors(err.errors)
+                    setIsLoading(false)
+                })
             }
         })
     }
