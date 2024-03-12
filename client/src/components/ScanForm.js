@@ -34,7 +34,7 @@ export default function ScanForm() {
     
 
     const handleScanRender = () => {
-        console.log("image URL: ",scanUrl)
+       
         setErrors([])
         fetch('/api/image_scan', {
             method: "POST",
