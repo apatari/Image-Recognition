@@ -26,7 +26,7 @@ export default function ScanForm() {
 
     const handleScanClick = () => {
 
-        if (scanUrl === "") { 
+        if (formText === "") { 
             return
         }
 
