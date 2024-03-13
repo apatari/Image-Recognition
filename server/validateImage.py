@@ -12,11 +12,8 @@ class Validate:
             f.close()
 
             image_path = "test.jpg"
-
             image = face_recognition.load_image_file(image_path)
-
             os.remove('test.jpg')
-
             faces =  len(face_recognition.face_locations(image))
         
             return faces

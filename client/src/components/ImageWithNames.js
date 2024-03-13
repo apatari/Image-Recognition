@@ -25,10 +25,10 @@ function ImageWithNames ({ imageData, PHOTO }) {
                                 right:'', 
                                 left:`${item.coordinates[3] + 55}px`, 
                                 top:`${item.coordinates[2] + 300}px`, 
-                                color:'red'
+                                color:'blue'
                             }} 
                         >
-                            <h4 className="p-1" style={{background: "red", color:'white' }} >{item.name}</h4>
+                            <h4 className="p-1" style={{background: "blue", color:'white' }} >{item.name}</h4>
                         </div>
                     </div>
                 )
