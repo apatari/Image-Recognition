@@ -20,15 +20,14 @@ class Url:
 
 
     def getCoordinates(self):
+
         data = requests.get(self.url).content
 
         f = open('img.jpg', 'wb')
         f.write(data)
         f.close()
 
-        image_path = "img.jpg"
-
-        image = face_recognition.load_image_file(image_path)
+        image = face_recognition.load_image_file("img.jpg")
 
         os.remove('img.jpg')
 
@@ -44,8 +43,7 @@ class Url:
 
         with app.app_context():
 
-            #get the coordinates of the faces 
-            coordinates = self.getCoordinates()
+            
 
             #get the user's image objects from db
             image_objects = User.query.filter_by(id=user_id).first().images
@@ -56,7 +54,10 @@ class Url:
                     f = open('dbImage.jpg', 'wb')
                     f.write(dbData)
                     f.close()
-                    em_encodings.append({"enc":face_recognition.load_image_file('dbImage.jpg'), "name": im_ob.name} ) 
+                    em_encodings.append({
+                        "enc":face_recognition.load_image_file('dbImage.jpg'), 
+                        "name": im_ob.name
+                    }) 
 
             #put the image from the target url into an image file
             bigPictureData = requests.get(self.url).content
@@ -64,6 +65,8 @@ class Url:
             f.write(bigPictureData)
             f.close()
 
+            #get the coordinates of the faces 
+            coordinates = self.getCoordinates()
 
             # iterate through each face,  as defined by the coordinates 
             for index, coordinate in enumerate(coordinates):
@@ -82,7 +85,7 @@ class Url:
                 unknown_image = face_recognition.load_image_file('target.jpg')
                 os.remove('target.jpg')
                 
-   
+                #iterate through the known image encodings and look for a match
                 for encoding in em_encodings:                 
 
                     if face_recognition.face_encodings(encoding["enc"]) and face_recognition.face_encodings(unknown_image):
@@ -95,7 +98,7 @@ class Url:
                         if results[0]:
                             res.append({"name": encoding['name'], "coordinates": coordinate})
                             foundMatch = True
-                            break
+                            break 
                             
                     
                 if not foundMatch:
