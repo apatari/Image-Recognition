@@ -156,7 +156,7 @@ function AddImageModal({ show, handleClose, images, setImages, mode, image }) {
                 
             </Modal.Body>
             <Modal.Footer>
-                <Button className="me-auto" type="submit" >{mode}</Button>
+                <Button className="me-auto btn-light " type="submit" >{mode}</Button>
                 <Button className="btn-secondary" onClick={() => {
                     handleClose()
                     formik.resetForm()
