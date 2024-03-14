@@ -34,7 +34,7 @@ function Header() {
                       href="/scan"
                       
                     >
-                      <h3>Scan an image</h3>  
+                      <h3>ID an image</h3>  
                     </Nav.Link>
 
                   </Nav>

@@ -70,12 +70,12 @@ export default function ScanForm() {
     return (
         <div className="m-3" >
             
-                <Form >
+                <Form className="m-3" >
                     <Row >
                     <Col lg={6}  >
 
                     <Form.Group className="mb-3" >
-                        <Form.Label className="fs-4">Scan an image</Form.Label>
+                        <Form.Label className="fs-4">ID faces in an image:</Form.Label>
                         <Form.Control type="text" placeholder="Enter image URL" onChange={handleScanChange} value={formText} />
                         <Form.Text className="text-muted">
                             { (errors.length > 0 && enteredImage)? 
