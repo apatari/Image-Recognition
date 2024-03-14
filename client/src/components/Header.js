@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Col, Button, Navbar, Nav, NavLink } from "react-bootstrap";
 import { UserContext } from "./App";
 
+
 function Header() {
 
     const [user, setUser] = useContext(UserContext)
@@ -16,24 +17,24 @@ function Header() {
 
 
     return (
-        <div className="p-3 bg-secondary" >
-            <Navbar expand="md"  >
-                <Navbar.Brand>Image Rec</Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav"/>
-                <Navbar.Collapse id="basic-navbar-nav" > 
+        <div  >
+            <Navbar  className="bg-primary p-3" data-bs-theme="dark" expand="md"  >
+                {/* <Navbar.Brand> <h2>Face Recognition</h2> </Navbar.Brand> */}
+                <Navbar.Toggle />
+                <Navbar.Collapse  > 
                   <Nav>
                     <Nav.Link
                       href="/"
                       
                     >
-                      Image Library
+                      <h3 className="me-4" >Image Library</h3> 
                     </Nav.Link>
 
                     <Nav.Link
                       href="/scan"
                       
                     >
-                      Scan an image
+                      <h3>Scan an image</h3>  
                     </Nav.Link>
 
                   </Nav>

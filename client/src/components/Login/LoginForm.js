@@ -50,7 +50,7 @@ function LoginForm({ onLogin }) {
 
 
     return (
-        <div>
+        <div >
             <Col className="mx-auto" lg={5} >
                 <h3 className="m-5" >Please log in</h3>
                 <Form className="m-4" onSubmit={formik.handleSubmit} >

@@ -24,7 +24,7 @@ function ImageWithNames ({ imageData, PHOTO }) {
                                 position:'absolute', 
                                 right:'', 
                                 left:`${item.coordinates[3] + 55}px`, 
-                                top:`${item.coordinates[2] + 300}px`, 
+                                top:`${item.coordinates[2] + 290}px`, 
                                 color:'blue'
                             }} 
                         >
